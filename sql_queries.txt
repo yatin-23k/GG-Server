@@ -1,0 +1,32 @@
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Wishlist (
+    wishlist_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id VARCHAR NOT NULL,
+    added_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Favorites (
+    favorite_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id VARCHAR NOT NULL,
+    added_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Library (
+    library_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id VARCHAR NOT NULL,
+    purchase_date TIMESTAMP NOT NULL,
+    price_at_purchase NUMERIC,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
